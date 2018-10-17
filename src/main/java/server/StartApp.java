@@ -15,10 +15,10 @@ import java.util.Date;
 @EntityScan(basePackages = {"domain"})
 @EnableJpaRepositories(basePackages = {"domain.repos"})
 @SpringBootApplication
-public class HelloWorldApplication {
+public class StartApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(HelloWorldApplication.class, args);
+        SpringApplication.run(StartApp.class, args);
     }
 
     //TODO MOCK
