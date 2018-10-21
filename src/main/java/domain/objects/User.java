@@ -2,6 +2,7 @@ package domain.objects;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,11 +20,17 @@ public class User {
     @GeneratedValue
     private Long userID;
 
+    @Column(unique=true)
     private String googleID;
-    private String facebookID;
+
+    @Column(unique=true)
     private String email;
 
-    private String nickname;
+    @Column(unique=true)
+    private String name;
+
+    private String pictureUrl;
+
     private Date createDate;
     private AccountState accountState;
 }

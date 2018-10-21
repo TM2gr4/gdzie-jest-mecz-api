@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import server.queries.ApplicationInfoCommand;
-import server.queries.CreateUserCommand;
-import server.queries.GetUserInfoCommand;
-import server.queries.objects.ApplicationInfo;
+import server.commands.user.AuthenticateUserCommand;
+import server.commands.user.GetUserInfoCommand;
+import server.requests.ApplicationInfoRequest;
+import server.requests.User.AuthenticateUserRequest;
+import server.requests.User.GetUserInfoRequest;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -20,24 +22,24 @@ import java.util.Optional;
 public class SampleRestEndpoint {
 
     private GetUserInfoCommand getUserInfoCommand;
-    private CreateUserCommand createUserCommand;
+    private AuthenticateUserCommand authenticateUserCommand;
 
     @RequestMapping("/init")
-    public ResponseEntity appInit(@RequestBody ApplicationInfo applicationInfo)
+    public ResponseEntity appInit(@RequestBody ApplicationInfoRequest applicationInfoRequest)
     {
-        if(applicationInfo.getVersion().equals("0.0.1"))
+        if(applicationInfoRequest.getVersion().equals("0.0.1"))
             return new ResponseEntity(HttpStatus.OK);
         else
             return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 
-    @RequestMapping("/sample/{id}")
-    public Optional<User> getUserInfo(@PathVariable("id") int id){
-        return getUserInfoCommand.handle(Long.valueOf(id));
+    @RequestMapping("/user/{id}")
+    public Optional<User> getUserInfo(@PathVariable("id") Long id){
+        return getUserInfoCommand.handle(new GetUserInfoRequest(id));
     }
 
-    @RequestMapping("/sample")
-    public String createUser(@RequestBody User user){
-        return createUserCommand.handle(user).getUserID().toString();
+    @RequestMapping("/authorize")
+    public String authenticateUser(@RequestBody AuthenticateUserRequest authenticateUserRequest) throws IOException {
+        return authenticateUserCommand.handle(authenticateUserRequest);
     }
 }
