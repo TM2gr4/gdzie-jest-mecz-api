@@ -2,10 +2,7 @@ package domain.objects;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
@@ -17,8 +14,8 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue
-    private Long userID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(unique=true)
     private String googleID;
@@ -26,7 +23,6 @@ public class User {
     @Column(unique=true)
     private String email;
 
-    @Column(unique=true)
     private String name;
 
     private String pictureUrl;
