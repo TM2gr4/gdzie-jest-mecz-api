@@ -7,7 +7,6 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetEventByIdRequest implements Request {
+public class ByIdRequest implements Request {
     private Long id;
 }
-
