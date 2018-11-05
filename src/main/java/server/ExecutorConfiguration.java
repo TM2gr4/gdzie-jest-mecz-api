@@ -6,8 +6,10 @@ import domain.repos.TeamRepository;
 import domain.repos.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import server.commands.match.GetMatchesCommand;
+import server.commands.event.GetEventByIdCommand;
 import server.commands.event.GetEventsCommand;
+import server.commands.match.GetMatchByIdCommand;
+import server.commands.match.GetMatchesCommand;
 import server.commands.team.GetTeamsCommand;
 import server.commands.user.AuthenticateUserCommand;
 import server.commands.user.GetUserInfoCommand;
@@ -33,6 +35,16 @@ public class ExecutorConfiguration {
     @Bean
     public GetMatchesCommand getMatches(MatchRepository matchRepository) {
         return new GetMatchesCommand(matchRepository);
+    }
+
+    @Bean
+    public GetMatchByIdCommand getMatchByIdCommand(MatchRepository matchRepository){
+        return new GetMatchByIdCommand(matchRepository);
+    }
+
+    @Bean
+    public GetEventByIdCommand getEventByIdCommand(EventRepository eventRepository){
+        return new GetEventByIdCommand(eventRepository);
     }
 
     @Bean
