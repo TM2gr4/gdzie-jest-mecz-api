@@ -18,8 +18,6 @@ public class AddEventCommand implements Command<String, AddEventRequest> {
                 addEventRequest.getMatchId(),
                 addEventRequest.getPubId(),
                 addEventRequest.getNumberOfAttendees(),
-                addEventRequest.getLongitude(),
-                addEventRequest.getLatitude(),
                 addEventRequest.getDescription()));
 
         return "Event added successfully.";

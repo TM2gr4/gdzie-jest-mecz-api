@@ -6,21 +6,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
 @Entity
-public class Event {
+
+public class Pub {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long matchId;
-    private Long pubId;
-    private Long numberOfAttendees;
-    private String description;
+    private Double latitude;
+    private Double longitude;
+    private String street;
+    private String number;
+    private String name;
 }
