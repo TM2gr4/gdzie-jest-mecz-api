@@ -1,15 +1,9 @@
 package server;
 
-import domain.repos.EventRepository;
-import domain.repos.MatchRepository;
-import domain.repos.TeamRepository;
-import domain.repos.UserRepository;
+import domain.repos.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import server.commands.event.AddEventCommand;
-import server.commands.event.DeleteEventWithIdCommand;
-import server.commands.event.GetEventByIdCommand;
-import server.commands.event.GetEventsCommand;
+import server.commands.event.*;
 import server.commands.match.AddMatchCommand;
 import server.commands.match.DeleteMatchWithIdCommand;
 import server.commands.match.GetMatchByIdCommand;
@@ -73,5 +67,15 @@ public class ExecutorConfiguration {
     @Bean
     public GetTeamsCommand getTeams(TeamRepository teamRepository) {
         return new GetTeamsCommand(teamRepository);
+    }
+
+    @Bean
+    public GetAllMatchesInAPubCommand getAllMatchesInAPub(PubEventRepository pubEventRepository){
+        return new GetAllMatchesInAPubCommand(pubEventRepository);
+    }
+
+    @Bean
+    public GetAllPubsForAMatchCommand getAllPubsForAMatch(PubEventRepository pubEventRepository){
+        return new GetAllPubsForAMatchCommand(pubEventRepository);
     }
 }
