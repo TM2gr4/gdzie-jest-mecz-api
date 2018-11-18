@@ -1,6 +1,7 @@
 package server.rest;
 
 import domain.objects.Match;
+import domain.objects.views.MatchView;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import server.commands.match.AddMatchCommand;
@@ -26,7 +27,7 @@ public class MatchRestEndpoints {
     private DeleteMatchWithIdCommand deleteMatchWithId;
 
     @RequestMapping(value = "/matches", method = RequestMethod.GET)
-    public List<Match> getMatches(EmptyRequest emptyRequest) {
+    public List<MatchView> getMatches(EmptyRequest emptyRequest) {
         return getMatchesCommand.handle(emptyRequest);
     }
 

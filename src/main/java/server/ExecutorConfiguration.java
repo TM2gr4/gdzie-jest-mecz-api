@@ -56,8 +56,8 @@ public class ExecutorConfiguration {
     }
 
     @Bean
-    public GetMatchesCommand getMatches(MatchRepository matchRepository) {
-        return new GetMatchesCommand(matchRepository);
+    public GetMatchesCommand getMatches(MatchRepository matchRepository, TeamRepository teamRepository) {
+        return new GetMatchesCommand(matchRepository, teamRepository);
     }
     @Bean
     public GetMatchByIdCommand getMatchById(MatchRepository matchRepository){
