@@ -8,6 +8,8 @@ import server.commands.match.AddMatchCommand;
 import server.commands.match.DeleteMatchWithIdCommand;
 import server.commands.match.GetMatchByIdCommand;
 import server.commands.match.GetMatchesCommand;
+import server.commands.pub.GetPubByIdCommand;
+import server.commands.pub.GetPubsCommand;
 import server.commands.team.GetTeamsCommand;
 import server.commands.user.AuthenticateUserCommand;
 import server.commands.user.GetUserInfoCommand;
@@ -77,5 +79,15 @@ public class ExecutorConfiguration {
     @Bean
     public GetAllPubsForAMatchCommand getAllPubsForAMatch(PubEventRepository pubEventRepository){
         return new GetAllPubsForAMatchCommand(pubEventRepository);
+    }
+
+    @Bean
+    public GetPubsCommand getPubsCommand(PubRepository pubRepository) {
+        return new GetPubsCommand(pubRepository);
+    }
+
+    @Bean
+    public GetPubByIdCommand getPubByIdCommand(PubRepository pubRepository) {
+        return new GetPubByIdCommand(pubRepository);
     }
 }
