@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,4 +18,5 @@ public class MatchView {
     private LocalTime time;
     private Team homeTeam;
     private Team awayTeam;
+    private List<PubEventView> pubs;
 }
