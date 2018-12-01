@@ -18,5 +18,5 @@ public class MatchView {
     private LocalTime time;
     private Team homeTeam;
     private Team awayTeam;
-    private List<PubEventView> pubs;
+    private List<EventView> pubs;
 }

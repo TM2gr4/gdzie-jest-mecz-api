@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class PubEventView {
+public class EventView {
     private Pub pub;
     private Long numberOfAttendees;
     private String description;

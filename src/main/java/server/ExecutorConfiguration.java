@@ -60,8 +60,8 @@ public class ExecutorConfiguration {
 
     @Bean
     public GetMatchesCommand getMatches(MatchRepository matchRepository, TeamRepository teamRepository,
-                                        PubEventRepository pubEventRepository, PubRepository pubRepository) {
-        return new GetMatchesCommand(matchRepository, teamRepository, pubEventRepository, pubRepository);
+                                        EventRepository eventRepository, PubRepository pubRepository) {
+        return new GetMatchesCommand(matchRepository, teamRepository, eventRepository, pubRepository);
     }
     @Bean
     public GetMatchByIdCommand getMatchById(MatchRepository matchRepository){
@@ -74,13 +74,13 @@ public class ExecutorConfiguration {
     }
 
     @Bean
-    public GetAllMatchesInAPubCommand getAllMatchesInAPub(PubEventRepository pubEventRepository){
-        return new GetAllMatchesInAPubCommand(pubEventRepository);
+    public GetAllMatchesInAPubCommand getAllMatchesInAPub(EventRepository eventRepository){
+        return new GetAllMatchesInAPubCommand(eventRepository);
     }
 
     @Bean
-    public GetAllPubsForAMatchCommand getAllPubsForAMatch(PubEventRepository pubEventRepository){
-        return new GetAllPubsForAMatchCommand(pubEventRepository);
+    public GetAllPubsForAMatchCommand getAllPubsForAMatch(EventRepository eventRepository){
+        return new GetAllPubsForAMatchCommand(eventRepository);
     }
 
     @Bean

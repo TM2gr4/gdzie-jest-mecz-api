@@ -1,7 +1,7 @@
 package server.commands.event;
 
-import domain.objects.events.PubEvent;
-import domain.repos.PubEventRepository;
+import domain.objects.Event;
+import domain.repos.EventRepository;
 import lombok.AllArgsConstructor;
 import server.commands.Command;
 import server.requests.Event.GetAllMatchesInAPubRequest;
@@ -10,23 +10,22 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
-public class GetAllMatchesInAPubCommand implements Command<List<PubEvent>, GetAllMatchesInAPubRequest> {
+public class GetAllMatchesInAPubCommand implements Command<List<Event>, GetAllMatchesInAPubRequest> {
 
-    private PubEventRepository pubEventRepository;
+    private EventRepository eventRepository;
 
     @Override
-    public List<PubEvent> handle(GetAllMatchesInAPubRequest getAllMatchesInAPubRequest) throws GeneralSecurityException, IOException {
+    public List<Event> handle(GetAllMatchesInAPubRequest getAllMatchesInAPubRequest) throws GeneralSecurityException, IOException {
 
-        List<PubEvent> pubEventList = new ArrayList();
-        for (PubEvent pubEvent : pubEventRepository.findAll()) {
-            if (pubEvent.getPubId() == getAllMatchesInAPubRequest.getPubId()) {
-                pubEventList.add(pubEvent);
+        List<Event> eventList = new ArrayList();
+        for (Event event : eventRepository.findAll()) {
+            if (event.getPubId() == getAllMatchesInAPubRequest.getPubId()) {
+                eventList.add(event);
             }
         }
 
-        return pubEventList;
+        return eventList;
     }
 }

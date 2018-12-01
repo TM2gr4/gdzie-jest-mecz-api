@@ -4,8 +4,10 @@ import domain.objects.Event;
 import domain.objects.Match;
 import domain.objects.Pub;
 import domain.objects.Team;
-import domain.objects.events.PubEvent;
-import domain.repos.*;
+import domain.repos.EventRepository;
+import domain.repos.MatchRepository;
+import domain.repos.PubRepository;
+import domain.repos.TeamRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,72 +18,72 @@ import java.time.LocalTime;
 @Configuration
 public class MockInjector {
     @Bean
-    public CommandLineRunner pubEventMock(PubEventRepository pubEventRepository) {
+    public CommandLineRunner eventMock(EventRepository eventRepository) {
         return (args) -> {
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(1L)
                     .pubId(1L)
                     .numberOfAttendees(20L)
                     .description("Real Madryt VS Liverpool pub 1 INDEKS")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(1L)
                     .pubId(2L)
                     .numberOfAttendees(20L)
                     .description("Real Madryt VS Liverpool pub 2 COTTON CLUB")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(1L)
                     .pubId(3L)
                     .numberOfAttendees(20L)
                     .description("Real Madryt VS Liverpool pub 3 Z INNEJ BECZKI")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(1L)
                     .pubId(4L)
                     .numberOfAttendees(20L)
                     .description("Real Madryt VS Liverpool pub 4 LONG PLAY")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(2L)
                     .pubId(2L)
                     .numberOfAttendees(20L)
                     .description("Tottenham VS Schalke pub 2 COTTON CLUB")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(2L)
                     .pubId(3L)
                     .numberOfAttendees(20L)
                     .description("Tottenham VS Schalke pub 3 Z INNEJ BECZKI")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(2L)
                     .pubId(4L)
                     .numberOfAttendees(20L)
                     .description("Tottenham VS Schalke pub 4 LONG PLAY")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(3L)
                     .pubId(2L)
                     .numberOfAttendees(20L)
                     .description("Liverpool vs RM pub 2 COTTON CLUB")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(3L)
                     .pubId(4L)
                     .numberOfAttendees(20L)
                     .description("Liverpool vs RM pub 4 LONG PLAY")
                     .build());
 
-            pubEventRepository.save(PubEvent.builder()
+            eventRepository.save(Event.builder()
                     .matchId(4L)
                     .pubId(2L)
                     .numberOfAttendees(20L)

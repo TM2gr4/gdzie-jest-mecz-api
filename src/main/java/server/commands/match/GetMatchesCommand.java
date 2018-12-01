@@ -1,11 +1,11 @@
 package server.commands.match;
 
+import domain.objects.Event;
 import domain.objects.Match;
-import domain.objects.events.PubEvent;
 import domain.objects.views.MatchView;
-import domain.objects.views.PubEventView;
+import domain.objects.views.EventView;
+import domain.repos.EventRepository;
 import domain.repos.MatchRepository;
-import domain.repos.PubEventRepository;
 import domain.repos.PubRepository;
 import domain.repos.TeamRepository;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ public class GetMatchesCommand implements Command<List<MatchView>, EmptyRequest>
 
     private MatchRepository matchRepository;
     private TeamRepository teamRepository;
-    private PubEventRepository pubEventRepository;
+    private EventRepository eventRepository;
     private PubRepository pubRepository;
 
     @Override
@@ -36,16 +36,16 @@ public class GetMatchesCommand implements Command<List<MatchView>, EmptyRequest>
                 .build())
                 .collect(Collectors.toList());
         matchViews.forEach(matchView -> {
-            List<PubEvent> pubEventList = new ArrayList();
-            for (PubEvent pubEvent : pubEventRepository.findAll()) {
-                if (pubEvent.getMatchId() == matchView.getId()) {
-                    pubEventList.add(pubEvent);
+            List<Event> eventList = new ArrayList();
+            for (Event event : eventRepository.findAll()) {
+                if (event.getMatchId() == matchView.getId()) {
+                    eventList.add(event);
                 }
             }
-            matchView.setPubs(pubEventList.stream().map(pubEvent -> PubEventView.builder()
-                    .pub(pubRepository.findById(pubEvent.getPubId()).get())
-                    .description(pubEvent.getDescription())
-                    .numberOfAttendees(pubEvent.getNumberOfAttendees())
+            matchView.setPubs(eventList.stream().map(event -> EventView.builder()
+                    .pub(pubRepository.findById(event.getPubId()).get())
+                    .description(event.getDescription())
+                    .numberOfAttendees(event.getNumberOfAttendees())
                     .build()).collect(Collectors.toList()));
         });
         return matchViews;

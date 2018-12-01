@@ -1,6 +1,5 @@
 package domain.repos;
 
-import domain.objects.Event;
 import domain.objects.Pub;
 import org.springframework.data.repository.CrudRepository;
 
