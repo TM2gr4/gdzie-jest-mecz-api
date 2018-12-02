@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
@@ -37,9 +38,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory().withClient("android").secret(passwordEncoder.encode("secret"))
-                .accessTokenValiditySeconds(30 * 60)
+                .accessTokenValiditySeconds(60 * 60)
                 .scopes("read", "write")
                 .authorizedGrantTypes("password", "refresh_token")
                 .refreshTokenValiditySeconds(7 * 24 * 60 * 60);
+    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception
+    {
+        oauthServer.checkTokenAccess("permitAll()");
     }
 }
