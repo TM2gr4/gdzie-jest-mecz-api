@@ -1,7 +1,6 @@
 package domain.repos;
 
 import domain.objects.Event;
-import domain.objects.Match;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
