@@ -8,6 +8,9 @@ import server.commands.match.AddMatchCommand;
 import server.commands.match.DeleteMatchWithIdCommand;
 import server.commands.match.GetMatchByIdCommand;
 import server.commands.match.GetMatchesCommand;
+import server.commands.pub.AddPubCommand;
+import server.commands.pub.GetPubByIdCommand;
+import server.commands.pub.GetPubsCommand;
 import server.commands.team.GetTeamsCommand;
 import server.commands.user.AuthenticateUserCommand;
 import server.commands.user.GetUserInfoCommand;
@@ -56,8 +59,9 @@ public class ExecutorConfiguration {
     }
 
     @Bean
-    public GetMatchesCommand getMatches(MatchRepository matchRepository) {
-        return new GetMatchesCommand(matchRepository);
+    public GetMatchesCommand getMatches(MatchRepository matchRepository, TeamRepository teamRepository,
+                                        EventRepository eventRepository, PubRepository pubRepository) {
+        return new GetMatchesCommand(matchRepository, teamRepository, eventRepository, pubRepository);
     }
     @Bean
     public GetMatchByIdCommand getMatchById(MatchRepository matchRepository){
@@ -70,12 +74,27 @@ public class ExecutorConfiguration {
     }
 
     @Bean
-    public GetAllMatchesInAPubCommand getAllMatchesInAPub(PubEventRepository pubEventRepository){
-        return new GetAllMatchesInAPubCommand(pubEventRepository);
+    public GetAllMatchesInAPubCommand getAllMatchesInAPub(EventRepository eventRepository){
+        return new GetAllMatchesInAPubCommand(eventRepository);
     }
 
     @Bean
-    public GetAllPubsForAMatchCommand getAllPubsForAMatch(PubEventRepository pubEventRepository){
-        return new GetAllPubsForAMatchCommand(pubEventRepository);
+    public GetAllPubsForAMatchCommand getAllPubsForAMatch(EventRepository eventRepository){
+        return new GetAllPubsForAMatchCommand(eventRepository);
+    }
+
+    @Bean
+    public GetPubsCommand getPubsCommand(PubRepository pubRepository) {
+        return new GetPubsCommand(pubRepository);
+    }
+
+    @Bean
+    public GetPubByIdCommand getPubByIdCommand(PubRepository pubRepository) {
+        return new GetPubByIdCommand(pubRepository);
+    }
+
+    @Bean
+    public AddPubCommand addPubCommand(PubRepository pubRepository){
+        return new AddPubCommand(pubRepository);
     }
 }

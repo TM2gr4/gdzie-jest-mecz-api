@@ -1,7 +1,6 @@
 package server.rest;
 
 import domain.objects.Event;
-import domain.objects.events.PubEvent;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import server.commands.event.*;
@@ -48,12 +47,12 @@ public class EventRestEndpoints {
     }
 
     @RequestMapping(value = "/events/getAllMatchesForPubId/{id}", method = RequestMethod.GET)
-    public List<PubEvent> getAllMatchesInAPub(@PathVariable("id") Long id) throws GeneralSecurityException, IOException {
+    public List<Event> getAllMatchesInAPub(@PathVariable("id") Long id) throws GeneralSecurityException, IOException {
         return getAllMatchesInAPubCommand.handle(new GetAllMatchesInAPubRequest(id));
     }
 
     @RequestMapping(value = "/events/GetAllPubsForMatchId/{id}", method = RequestMethod.GET)
-    public List<PubEvent> getAllPubsForAMatch(@PathVariable("id") Long id) throws GeneralSecurityException, IOException {
+    public List<Event> getAllPubsForAMatch(@PathVariable("id") Long id) throws GeneralSecurityException, IOException {
         return getAllPubsForAMatchCommand.handle(new GetAllPubsForAMatchRequest(id));
     }
 }

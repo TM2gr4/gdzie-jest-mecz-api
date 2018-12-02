@@ -17,7 +17,5 @@ public class AddEventRequest implements Request {
     private Long matchId;
     private Long pubId;
     private Long numberOfAttendees;
-    private Double longitude;
-    private Double latitude;
     private String description;
 }
