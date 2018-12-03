@@ -10,6 +10,7 @@ import server.commands.Command;
 import server.requests.User.AuthenticateUserRequest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -29,7 +30,8 @@ public class AuthenticateUserCommand implements Command<String, AuthenticateUser
                 .email(payload.getEmail())
                 .pictureUrl((String) payload.get("picture"))
                 .createDate(new Date())
-                .accountState(AccountState.ACTIVE).build());
+                .accountState(AccountState.ACTIVE)
+                .build());
 
         return "OK";
 

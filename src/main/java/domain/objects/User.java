@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -11,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table
 public class User {
 
     @Id
@@ -29,4 +32,10 @@ public class User {
 
     private Date createDate;
     private AccountState accountState;
+
+    @ElementCollection
+    private Set<Long> favouriteMatchIds = new HashSet<>();
+
+    @ElementCollection
+    private Set<Long> ignoredMatchIds = new HashSet<>();
 }

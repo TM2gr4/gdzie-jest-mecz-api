@@ -12,8 +12,7 @@ import server.commands.pub.AddPubCommand;
 import server.commands.pub.GetPubByIdCommand;
 import server.commands.pub.GetPubsCommand;
 import server.commands.team.GetTeamsCommand;
-import server.commands.user.AuthenticateUserCommand;
-import server.commands.user.GetUserInfoCommand;
+import server.commands.user.*;
 
 @Configuration
 public class ExecutorConfiguration {
@@ -29,12 +28,12 @@ public class ExecutorConfiguration {
     }
 
     @Bean
-    public AddEventCommand addEvent(EventRepository eventRepository){
+    public AddEventCommand addEvent(EventRepository eventRepository) {
         return new AddEventCommand(eventRepository);
     }
 
     @Bean
-    public DeleteEventWithIdCommand deleteEvent(EventRepository eventRepository){
+    public DeleteEventWithIdCommand deleteEvent(EventRepository eventRepository) {
         return new DeleteEventWithIdCommand(eventRepository);
     }
 
@@ -44,17 +43,17 @@ public class ExecutorConfiguration {
     }
 
     @Bean
-    public GetEventByIdCommand getEventById(EventRepository eventRepository){
+    public GetEventByIdCommand getEventById(EventRepository eventRepository) {
         return new GetEventByIdCommand(eventRepository);
     }
 
     @Bean
-    public AddMatchCommand addMatch(MatchRepository matchRepository){
+    public AddMatchCommand addMatch(MatchRepository matchRepository) {
         return new AddMatchCommand(matchRepository);
     }
 
     @Bean
-    public DeleteMatchWithIdCommand deleteMatch(MatchRepository matchRepository){
+    public DeleteMatchWithIdCommand deleteMatch(MatchRepository matchRepository) {
         return new DeleteMatchWithIdCommand(matchRepository);
     }
 
@@ -63,8 +62,9 @@ public class ExecutorConfiguration {
                                         EventRepository eventRepository, PubRepository pubRepository) {
         return new GetMatchesCommand(matchRepository, teamRepository, eventRepository, pubRepository);
     }
+
     @Bean
-    public GetMatchByIdCommand getMatchById(MatchRepository matchRepository){
+    public GetMatchByIdCommand getMatchById(MatchRepository matchRepository) {
         return new GetMatchByIdCommand(matchRepository);
     }
 
@@ -74,12 +74,12 @@ public class ExecutorConfiguration {
     }
 
     @Bean
-    public GetAllMatchesInAPubCommand getAllMatchesInAPub(EventRepository eventRepository){
+    public GetAllMatchesInAPubCommand getAllMatchesInAPub(EventRepository eventRepository) {
         return new GetAllMatchesInAPubCommand(eventRepository);
     }
 
     @Bean
-    public GetAllPubsForAMatchCommand getAllPubsForAMatch(EventRepository eventRepository){
+    public GetAllPubsForAMatchCommand getAllPubsForAMatch(EventRepository eventRepository) {
         return new GetAllPubsForAMatchCommand(eventRepository);
     }
 
@@ -94,7 +94,37 @@ public class ExecutorConfiguration {
     }
 
     @Bean
-    public AddPubCommand addPubCommand(PubRepository pubRepository){
+    public AddPubCommand addPubCommand(PubRepository pubRepository) {
         return new AddPubCommand(pubRepository);
+    }
+
+    @Bean
+    public AddIgnoredMatches addIgnoredMatches(UserRepository userRepository) {
+        return new AddIgnoredMatches(userRepository);
+    }
+
+    @Bean
+    public AddFavouriteMatches addFavouriteMatches(UserRepository userRepository) {
+        return new AddFavouriteMatches(userRepository);
+    }
+
+    @Bean
+    public RemoveFavouriteMatches removeFavouriteMatches(UserRepository userRepository) {
+        return new RemoveFavouriteMatches(userRepository);
+    }
+
+    @Bean
+    public RemoveIgnoredMatches removeIgnoredMatches(UserRepository userRepository) {
+        return new RemoveIgnoredMatches(userRepository);
+    }
+
+    @Bean
+    public GetIgnoredMatches getIgnoredMatches(UserRepository userRepository, GetMatchesCommand getMatchesCommand) {
+        return new GetIgnoredMatches(userRepository, getMatchesCommand);
+    }
+
+    @Bean
+    public GetFavouritesMatches getMatchesCommand(UserRepository userRepository, GetMatchesCommand getMatchesCommand) {
+        return new GetFavouritesMatches(userRepository, getMatchesCommand);
     }
 }
