@@ -4,10 +4,7 @@ import domain.repos.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import server.commands.event.*;
-import server.commands.match.AddMatchCommand;
-import server.commands.match.DeleteMatchWithIdCommand;
-import server.commands.match.GetMatchByIdCommand;
-import server.commands.match.GetMatchesCommand;
+import server.commands.match.*;
 import server.commands.pub.AddPubCommand;
 import server.commands.pub.GetPubByIdCommand;
 import server.commands.pub.GetPubsCommand;
@@ -126,5 +123,10 @@ public class ExecutorConfiguration {
     @Bean
     public GetFavouritesMatches getMatchesCommand(UserRepository userRepository, GetMatchesCommand getMatchesCommand) {
         return new GetFavouritesMatches(userRepository, getMatchesCommand);
+    }
+
+    @Bean
+    public GetNonIgnoredMatchesCommand getNonIgnoredMatchesCommand(UserRepository userRepository, GetMatchesCommand getMatchesCommand) {
+        return new GetNonIgnoredMatchesCommand(userRepository, getMatchesCommand);
     }
 }

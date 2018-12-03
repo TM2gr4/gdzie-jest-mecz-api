@@ -4,16 +4,14 @@ import domain.objects.Match;
 import domain.objects.views.MatchView;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import server.commands.match.AddMatchCommand;
-import server.commands.match.DeleteMatchWithIdCommand;
-import server.commands.match.GetMatchByIdCommand;
-import server.commands.match.GetMatchesCommand;
+import server.commands.match.*;
 import server.requests.ByIdRequest;
-import server.requests.EmptyRequest;
 import server.requests.Match.AddMatchRequest;
+import server.requests.User.IgnoredOrFavouriteHelper;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +19,15 @@ import java.util.Optional;
 @AllArgsConstructor
 public class MatchRestEndpoints {
 
-    private GetMatchesCommand getMatchesCommand;
     private GetMatchByIdCommand getMatchByIdCommand;
     private AddMatchCommand addMatchCommand;
     private DeleteMatchWithIdCommand deleteMatchWithId;
+    private GetNonIgnoredMatchesCommand getNonIgnoredMatchesCommand;
 
     @RequestMapping(value = "/matches", method = RequestMethod.GET)
-    public List<MatchView> getMatches(EmptyRequest emptyRequest) {
-        return getMatchesCommand.handle(emptyRequest);
+    public List<MatchView> getMatches(Principal principal) {
+        return getNonIgnoredMatchesCommand.handle(IgnoredOrFavouriteHelper.builder()
+                .principal(principal).build());
     }
 
     @RequestMapping(value = "/matches/{id}", method = RequestMethod.GET)
