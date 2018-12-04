@@ -24,10 +24,10 @@ public class AddPubCommand implements Command<String, AddPubRequest> {
 
         val pubs = pubRepository.findAll();
         for (Pub pub : pubs) {
-            if (pub.getName().equals(addPubRequest.getName()) &&
-                    pub.getStreet().equals(addPubRequest.getStreet()) &&
-                    pub.getNumber().equals(addPubRequest.getNumber())) {
-                return "Request cancelled: Trying to add duplicate pub.";
+            if (pub.getName().equals(addPubRequest.getName()) ||
+                    (pub.getStreet().equals(addPubRequest.getStreet()) &&
+                    pub.getNumber().equals(addPubRequest.getNumber()))) {
+                throw new RuntimeException("Request cancelled: Trying to add duplicate pub.");
             }
         }
 
