@@ -17,7 +17,7 @@ import java.time.LocalTime;
 
 @Configuration
 public class MockInjector {
-    @Bean
+    /*@Bean
     public CommandLineRunner eventMock(EventRepository eventRepository) {
         return (args) -> {
             eventRepository.save(Event.builder()
@@ -279,6 +279,6 @@ public class MockInjector {
 
         };
     }
-
+*/
 
 }
